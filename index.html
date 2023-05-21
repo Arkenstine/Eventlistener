@@ -1,54 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Contact Form</title>
-	<script>
-		window.addEventListener('DOMContentLoaded', (event) => {
-			const nameInput = document.querySelector('#name');
-			const phoneInput = document.querySelector('#phone');
-			const emailInput = document.querySelector('#email');
-
-			nameInput.addEventListener('input', () => {
-				saveFormData();
-			});
-
-			phoneInput.addEventListener('input', () => {
-				saveFormData();
-			});
-
-			emailInput.addEventListener('input', () => {
-				saveFormData();
-			});
-
-			function saveFormData() {
-				const contactName = nameInput.value;
-				const contactPhone = phoneInput.value;
-
-				const data = { contact_name: contactName, contact_phone: contactPhone };
-				const jsonData = JSON.stringify(data);
-
-				const file = new Blob([jsonData], {type: 'application/json'});
-				const a = document.createElement('a');
-				a.href = URL.createObjectURL(file);
-				a.download = 'contact_data.json';
-				a.click();
-			}
-		});
-	</script>
+  <title>Form Abandonment Tracker</title>
 </head>
 <body>
-	<h1>Contact Form</h1>
-	<form>
-		<label for="name">Name:</label>
-		<input type="text" id="name" name="name" required><br>
+  <h1>Form Abandonment Tracker</h1>
+  <form id="myForm" action="submit.php" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
 
-		<label for="phone">Phone:</label>
-		<input type="tel" id="phone" name="phone" required><br>
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone" required><br>
 
     <label for="email">Email:</label>
-		<input type="email" id="email" name="email" required><br>
+    <input type="email" id="email" name="email" required><br>
 
-		<input type="submit" value="Submit">
-	</form>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script src="script.js"></script>
 </body>
 </html>
