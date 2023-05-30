@@ -43,7 +43,7 @@
         // Send data to server to update JSON file
         $.ajax({
           type: 'POST',
-          url: '/update-json.php', // Update this URL with the script to handle JSON updates
+          url: '/update-json.php', // URL to the server-side script to handle JSON updates
           data: JSON.stringify(data),
           contentType: 'application/json',
           success: function () {
@@ -62,7 +62,7 @@
         // Send partial data to server to update JSON file
         $.ajax({
           type: 'POST',
-          url: '/update-json.php', // Update this URL with the server-side script to handle JSON updates
+          url: '/update-json.php', // URL to the server-side script to handle JSON updates
           data: JSON.stringify(data),
           contentType: 'application/json',
           success: function () {
