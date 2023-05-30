@@ -1,23 +1,80 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Form Abandonment Tracker</title>
+  <title>Form Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-  <h1>Form Abandonment Tracker</h1>
-  <form id="myForm" action="submit.php" method="post">
+  <h1>Form Example</h1>
+
+  <form id="myForm">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br>
+    <input type="text" id="name" name="name" required><br><br>
 
     <label for="phone">Phone Number:</label>
-    <input type="text" id="phone" name="phone" required><br>
+    <input type="text" id="phone" name="phone" required><br><br>
 
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
+    <input type="email" id="email" name="email" required><br><br>
 
     <input type="submit" value="Submit">
   </form>
 
-  <script src="script.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Listen for form submit event
+      $('#myForm').submit(function (event) {
+        event.preventDefault();
+
+        // Collect form data
+        var name = $('#name').val();
+        var phone = $('#phone').val();
+        var email = $('#email').val();
+
+        // Create JSON object
+        var data = {
+          name: name,
+          phone: phone,
+          email: email
+        };
+
+        // Send data to server to update JSON file
+        $.ajax({
+          type: 'POST',
+          url: '/update-json.php', // Update this URL with the script to handle JSON updates
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          success: function () {
+            console.log('Data updated successfully.');
+          },
+          error: function () {
+            console.error('Error updating data.');
+          }
+        });
+      });
+
+      // Listen for form input changes
+      $('#myForm input').on('input', function () {
+        var data = $('#myForm').serializeArray();
+
+        // Send partial data to server to update JSON file
+        $.ajax({
+          type: 'POST',
+          url: '/update-json.php', // Update this URL with the server-side script to handle JSON updates
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          success: function () {
+            console.log('Partial data updated successfully.');
+          },
+          error: function () {
+            console.error('Error updating partial data.');
+          }
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
